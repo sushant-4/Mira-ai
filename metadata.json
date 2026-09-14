@@ -1,0 +1,6 @@
+{
+  "name": "Mira",
+  "description": "Jarvis-style AI mobile assistant with voice interaction, live captions, multi-step device automation, and universal multilingual intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

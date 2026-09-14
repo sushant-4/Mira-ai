@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Mira</string>
+    <string name="accessibility_service_desc">Enables Mira AI Assistant to observe active UI screens, navigate apps, and automate device actions safely on your behalf.</string>
+</resources>
