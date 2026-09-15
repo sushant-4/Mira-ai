@@ -8,7 +8,7 @@ on:
       - master
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -40,3 +40,23 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish APK release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APK_PATH: app/build/outputs/apk/debug/app-debug.apk
+        run: |
+          release_tag="mira-build-${GITHUB_RUN_NUMBER}"
+          cp "$APK_PATH" Mira-AI-Assistant.apk
+          gh release create "$release_tag" Mira-AI-Assistant.apk \
+            --title "Mira AI Assistant build ${GITHUB_RUN_NUMBER}" \
+            --notes "Install Mira AI Assistant on an Android phone. This is a debug build for testing and personal use."
+
+          download_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/latest/download/Mira-AI-Assistant.apk"
+          {
+            echo "## APK download"
+            echo
+            echo "Download directly on an Android phone:"
+            echo
+            echo "${download_url}"
+          } >> "$GITHUB_STEP_SUMMARY"
