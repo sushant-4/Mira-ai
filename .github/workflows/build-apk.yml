@@ -30,6 +30,18 @@ jobs:
         with:
           gradle-version: '9.3.1'
 
+      - name: Create debug signing key
+        run: |
+          keytool -genkeypair \
+            -keystore debug.keystore \
+            -storepass android \
+            -keypass android \
+            -alias androiddebugkey \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
       - name: Build debug APK
         run: gradle --no-daemon :app:assembleDebug
 
